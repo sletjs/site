@@ -1,6 +1,6 @@
-title: Hexo
-subtitle: "A fast, simple & powerful blog framework powered by Node.js."
-description: "Hexo is a fast, simple & powerful blog framework powered by Node.js."
+title: Slet
+subtitle: "A fast, simple & powerful web framework powered by Node.js."
+description: "Sletjs is a fast, simple & powerful web framework powered by Node.js."
 author: 狼叔
 language: en
 timezone: UTC
@@ -21,7 +21,7 @@ deploy:
   type: git
   repo: git@github.com:sletjs/sletjs.github.io.git
 
-disqus_shortname: hexojs
+disqus_shortname: sletjs
 google_analytics: UA-4910098-10
 fb_admins: 100000247608790
 algolia:
