@@ -2,7 +2,7 @@ title: Router
 ---
 
 
-## 手动知道path和controller
+## 手动指定
 
 （controller内部不需要path）
 
