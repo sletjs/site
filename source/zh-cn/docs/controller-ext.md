@@ -7,7 +7,7 @@ title:  扩展controller
 - 继承自BaseController
 - 可选实现上面的生命周期方法
 
-```
+```js
 'use strict';
 
 const BaseController = require('slet-basecontroller')
@@ -25,13 +25,13 @@ module.exports = class BasicController extends BaseController{
 
 在app.js中使用defineController方法加载这个控制器
 
-```
+```js
 app.defineController(require('slet-basiccontroller'))
 ```
 
 然后，在自己的类中
 
-```
+```js
 'use strict';
 
 const BasicController = require('../../../').BasicController

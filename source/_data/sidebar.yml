@@ -11,20 +11,9 @@ docs:
     http: http.html
     render: render.html
     filter: filter.html
-    front_matter: front-matter.html
-    tag_plugins: tag-plugins.html
-    asset_folders: asset-folders.html
-    data_files: data-files.html
-    server: server.html
-    generating: generating.html
-    deployment: deployment.html
   customization:
+    extend: extend.html
     controller-ext: controller-ext.html
-    themes: themes.html
-    templates: templates.html
-    variables: variables.html
-    helpers: helpers.html
-    internationalization: internationalization.html
     plugins: plugins.html
   miscellaneous:
     troubleshooting: troubleshooting.html
