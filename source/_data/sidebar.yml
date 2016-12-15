@@ -6,6 +6,7 @@ docs:
     commands: commands.html
     migration: migration.html
   basic_usage:
+    controller: controller.html
     writing: writing.html
     front_matter: front-matter.html
     tag_plugins: tag-plugins.html
@@ -37,6 +38,7 @@ api:
     posts: posts.html
     scaffolds: scaffolds.html
     themes: themes.html
+    controller: controller.html
   extensions:
     console: console.html
     deployer: deployer.html
