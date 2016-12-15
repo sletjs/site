@@ -9,19 +9,19 @@ title: 渲染
 即
 
 
-```
+```js
 this.renderType = 'view' | 'default'
 ```
 
 ## 基本类型
 
-```
+```js
 this.renderType = 'default'
 ```
 
 ### text
 
-```
+```js
   get() {
     var a = this.query.a
     console.log(a)
@@ -30,7 +30,7 @@ this.renderType = 'default'
 
 ### html
 
-```
+```js
   get() {
     var a = this.query.a
     console.log(a)
@@ -40,7 +40,7 @@ this.renderType = 'default'
 
 ### json
 
-```
+```js
   get() {
     var a = this.query.a
     console.log(a)
@@ -56,13 +56,13 @@ this.renderType = 'default'
 结合模板引擎来渲染view的示例
 
 
-```
+```js
 this.renderType = 'view'
 ```
 
 ### 安装slet模块
 
-```
+```js
 $ npm i -S slet
 $ npm i -S slet-viewcontroller
 $ npm i -S nunjucks
@@ -70,7 +70,7 @@ $ npm i -S nunjucks
 
 ### 从app.js开始
 
-```
+```js
 'use strict';
 
 const Slet = require('slet');
@@ -88,7 +88,7 @@ app.start(3000)
 
 如果想定制，可以通过配置项来实现，这里采用系统默认的nunjucks作为模板引擎
 
-```
+```js
 const app = new Slet({
     root: __dirname,
     debug: true,
@@ -102,7 +102,7 @@ const app = new Slet({
 
 ### 编写viewctrl.js
 
-```
+```js
 'use strict';
 
 const ViewController = require('slet').ViewController
@@ -128,7 +128,7 @@ module.exports = class MyViewController extends ViewController {
 
 ### 创建index.html
 
-```
+```js
 <h1>{{title}}</h1>
 ```
 
@@ -138,7 +138,7 @@ module.exports = class MyViewController extends ViewController {
 
 最后，执行app.js，启动server
 
-```
+```js
 $ node app.js
 ```
 
@@ -148,7 +148,7 @@ $ node app.js
 
 ## 扩展
 
-```
+```js
 this.renderType = 'view'
 ```
 
