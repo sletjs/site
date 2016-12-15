@@ -2,7 +2,7 @@ title: 贡献
 ---
 ## 开发
 
-我们非常欢迎您加入 Hexo 的开发，这份文件将帮助您了解开发流程。
+我们非常欢迎您加入 Slet 的开发，这份文件将帮助您了解开发流程。
 
 ### 开始之前
 
@@ -14,12 +14,12 @@ title: 贡献
 
 ### 工作流程
 
-1. Fork [hexojs/hexo]
+1. Fork [sletjs/slet]
 2. 把库（repository）复制到电脑上，并安装所依赖的插件。
 
     {% code %}
-    $ git clone https://github.com/<username>/hexo.git
-    $ cd hexo
+    $ git clone https://github.com/<username>/slet.git
+    $ cd slet
     $ npm install
     $ git submodule update --init
     {% endcode %}
@@ -50,11 +50,11 @@ title: 贡献
 
 ## 更新文档
 
-Hexo 文档开放源代码，您可以在 [hexojs/site] 找到源代码。
+Slet 文档开放源代码，您可以在 [Sletjs/site] 找到源代码。
 
 ### 工作流程
 
-1. Fork [hexojs/site]
+1. Fork [Sletjs/site]
 2. 把库（repository）复制到电脑上，并安装所依赖的插件。
 
     {% code %}
@@ -66,7 +66,7 @@ Hexo 文档开放源代码，您可以在 [hexojs/site] 找到源代码。
 3. 开始编辑文件，您可以通过服务器预览变动。
 
     {% code %}
-    $ hexo server
+    $ Slet server
     {% endcode %}
 
 4. 推送（push）分支。
@@ -81,11 +81,11 @@ Hexo 文档开放源代码，您可以在 [hexojs/site] 找到源代码。
 
 ## 反馈问题
 
-当您在使用 Hexo 时遇到问题，您可以尝试在 [问题解答](troubleshooting.html) 中寻找解答，或是在 [GitHub](https://github.com/hexojs/hexo/issues) 或 [Google Group](https://groups.google.com/group/hexo) 上提问。如果你没有找答案，请在 Github 报告它。
+当您在使用 Slet 时遇到问题，您可以尝试在 [问题解答](troubleshooting.html) 中寻找解答，或是在 [GitHub](https://github.com/sletjs/slet/issues) 或 [Google Group](https://groups.google.com/group/slet) 上提问。如果你没有找答案，请在 Github 报告它。
 
 1. 在 [调试模式](commands.html#调试模式) 中重现问题。
-2. 运行 `hexo version` 并检查版本信息。
+2. 运行 `slet version` 并检查版本信息。
 3. 把调试信息和版本信息都贴到 GitHub。
 
-[hexojs/hexo]: https://github.com/hexojs/hexo
-[hexojs/site]: https://github.com/hexojs/site
+[Sletjs/Slet]: https://github.com/sletjs/slet
+[Sletjs/site]: https://github.com/sletjs/site
