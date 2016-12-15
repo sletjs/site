@@ -71,8 +71,8 @@ module.exports = class MyBasicController extends ViewController {
   }
 
   get () {
-    # matches "GET /hello/foo" and "GET /hello/bar"
-    # params['name'] is 'foo' or 'bar'
+    // matches "GET /hello/foo" and "GET /hello/bar"
+    // params['name'] is 'foo' or 'bar'
     return `Hello ${this.params['name']}!`
   }
 }
