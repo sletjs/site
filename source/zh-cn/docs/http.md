@@ -12,7 +12,7 @@ curl http://127.0.0.1:6001/posts?a=1&b=2
 
 此时，你可以通过
 
-```
+```js
 get () {
   let a = this.query.a
   let b = this.query.b
@@ -34,7 +34,7 @@ posts/:id => posts/89
 
 此时，你可以通过
 
-```
+```js
 get () {
   let id = this.params.id
   // 此时id = 89
@@ -56,7 +56,7 @@ curl -d "name='foo'" http://127.0.0.1:6001/c
 
 处理如下
 
-```
+```js
 post () {
   let _name = this.body.name
   // 此时_name = 'foo'
@@ -81,14 +81,14 @@ post () {
 
 ### UploadController
 
-```
+```js
 $ npm i -S slet
 $ npm i -S slet-uploadcontroller
 ```
 
 编写uploadctrl.js
 
-```
+```js
 'use strict';
 
 const UploadController = require('slet').UploadController
@@ -117,7 +117,7 @@ module.exports = class MyUploadController extends UploadController {
 
 ### UploadViewController
 
-```
+```js
 $ npm i -S slet
 $ npm i -S slet-viewcontroller
 $ npm i -S nunjucks
@@ -126,7 +126,7 @@ $ npm i -S slet-uploadviewcontroller
 
 编写uploadctrl.js
 
-```
+```js
 'use strict';
 
 const UploadViewController = require('slet').UploadViewController
