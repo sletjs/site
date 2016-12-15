@@ -1,7 +1,7 @@
 docs:
   getting_started:
     overview: index.html
-    setup: setup.html
+    firstproject: firstproject.html
     configuration: configuration.html
     commands: commands.html
     migration: migration.html
