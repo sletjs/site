@@ -9,6 +9,7 @@ docs:
     router: router.html
     controller: controller.html
     http: http.html
+    render: render.html
     filter: filter.html
     front_matter: front-matter.html
     tag_plugins: tag-plugins.html

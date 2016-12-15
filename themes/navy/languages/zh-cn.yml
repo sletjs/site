@@ -50,6 +50,7 @@ sidebar:
     controller: 控制器
     http: Http基础
     filter: 过滤器
+    render: 渲染
   api:
     core: 核心
     overview: 概述
