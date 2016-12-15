@@ -1,65 +1,70 @@
-title: 建站
+title: 第一个例子
 ---
 
-安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。
+## 安装slet模块
 
-``` bash
-$ hexo init <folder>
-$ cd <folder>
-$ npm install
+```sh
+$ npm i -S slet
 ```
 
-新建完成后，指定文件夹的目录如下：
+## 从app.js开始
 
-``` plain
-.
-├── _config.yml
-├── package.json
-├── scaffolds
-├── source
-|   ├── _drafts
-|   └── _posts
-└── themes
+```js
+'use strict';
+
+const Slet = require('slet');
+const app = new Slet({
+    root: __dirname,
+    debug: true
+});
+
+app.router('/', './basicctrl')  
+
+app.start(3000)
 ```
 
-### _config.yml
+## 编写basicctrl.js
 
-网站的 [配置](zh-cn/docs/configuration.html) 信息，您可以在此配置大部分的参数。
+```js
+'use strict';
 
-### package.json
+const BasicController = require('slet').BasicController
 
-应用程序的信息。[EJS](http://embeddedjs.com/), [Stylus](http://learnboost.github.io/stylus/) 和 [Markdown](http://daringfireball.net/projects/markdown/) renderer 已默认安装，您可以自由移除。
-
-``` json package.json
-{
-  "name": "hexo-site",
-  "version": "0.0.0",
-  "private": true,
-  "hexo": {
-    "version": ""
-  },
-  "dependencies": {
-    "hexo": "^3.0.0",
-    "hexo-generator-archive": "^0.1.0",
-    "hexo-generator-category": "^0.1.0",
-    "hexo-generator-index": "^0.1.0",
-    "hexo-generator-tag": "^0.1.0",
-    "hexo-renderer-ejs": "^0.1.0",
-    "hexo-renderer-stylus": "^0.2.0",
-    "hexo-renderer-marked": "^0.2.4",
-    "hexo-server": "^0.1.2"
+module.exports = class MyBasicController extends BasicController {
+  constructor(app, ctx, next) {
+    super(app, ctx, next)
   }
+  
+  get() { 
+    let a = this.query.a
+    // this.renderType='view'
+    return {
+      a: 'this is a',
+      b: {
+        c: 'ssddssdd a= ' + a
+      }
+    }
+  } 
 }
+
 ```
 
-### scaffolds
+## 启动server
 
-[模版](zh-cn/docs/writing.html) 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。
+最后，执行app.js，启动server
 
-### source
+```sh
+$ node app.js
+```
 
-资源文件夹是存放用户资源的地方。除 `_posts` 文件夹之外，开头命名为 `_` (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 `public` 文件夹，而其他文件会被拷贝过去。
+## 查验结果
 
-### themes
+在浏览器中打开 http://127.0.0.1:3000/?a=2
 
-[主题](zh-cn/docs/themes.html) 文件夹。Hexo 会根据主题来生成静态页面。
+## 更多示例
+
+- [example-basic](https://github.com/sletjs/example-basic)
+- [example-basic-autorouter](https://github.com/sletjs/example-basic-autorouter)
+- [example-view](https://github.com/sletjs/example-view)
+- [example-upload](https://github.com/sletjs/example-upload)
+- [example-upload-view](https://github.com/sletjs/example-upload-view)

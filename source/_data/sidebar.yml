@@ -6,8 +6,10 @@ docs:
     commands: commands.html
     migration: migration.html
   basic_usage:
+    router: router.html
     controller: controller.html
-    writing: writing.html
+    http: http.html
+    filter: filter.html
     front_matter: front-matter.html
     tag_plugins: tag-plugins.html
     asset_folders: asset-folders.html
@@ -16,7 +18,7 @@ docs:
     generating: generating.html
     deployment: deployment.html
   customization:
-    permalinks: permalinks.html
+    controller-ext: controller-ext.html
     themes: themes.html
     templates: templates.html
     variables: variables.html

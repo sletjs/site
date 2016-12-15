@@ -1,45 +1,83 @@
 title: Front-matter
 ---
-Front-matter 是文件最上方以 `---` 分隔的区域，用于指定个别文件的变量，举例来说：
 
-``` yaml
-title: Hello World
-date: 2013/7/13 20:46:25
----
+
+<!--## Other
+
+
+
+Route patterns may include named parameters, accessible via the params hash:
+
+```
+'use strict'
+
+const BasicController = require('../../../').BasicController
+
+module.exports = class MyParamsController extends BasicController {
+  constructor(app, ctx, next) {
+    super(app, ctx, next)
+
+    this.path = '/hello/:name'
+  }
+
+  alias () {
+    this.params = this.ctx.params
+  }
+
+  get () {
+    // matches "GET /hello/foo" and "GET /hello/bar"
+    // params['name'] is 'foo' or 'bar'
+    return `Hello ${this.params['name']}!`
+  }
+}
 ```
 
-以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。
+You can also access named parameters via block parameters:
 
-参数 | 描述 | 默认值
---- | --- | ---
-`layout` | 布局 | 
-`title` | 标题 |
-`date` | 建立日期 | 文件建立日期
-`updated` | 更新日期 | 文件更新日期
-`comments` | 开启文章的评论功能 | true
-`tags` | 标签（不适用于分页） |
-`categories` | 分类（不适用于分页）|
-`permalink` | 覆盖文章网址 |
+get '/hello/:name' do |n|
+  # matches "GET /hello/foo" and "GET /hello/bar"
+  # params['name'] is 'foo' or 'bar'
+  # n stores params['name']
+  "Hello #{n}!"
+end
+Route patterns may also include splat (or wildcard) parameters, accessible via the params['splat'] array:
 
-## 分类和标签
+get '/say/*/to/*' do
+  # matches /say/hello/to/world
+  params['splat'] # => ["hello", "world"]
+end
 
-只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 `Foo, Bar` 不等于 `Bar, Foo`；而标签没有顺序和层次。
+get '/download/*.*' do
+  # matches /download/path/to/file.xml
+  params['splat'] # => ["path/to/file", "xml"]
+end
+Or with block parameters:
 
+get '/download/*.*' do |path, ext|
+  [path, ext] # => ["path/to/file", "xml"]
+end
+Route matching with Regular Expressions:
 
-``` yaml
-categories:
-- Diary
-tags:
-- PS3
-- Games
-```
+get /\A\/hello\/([\w]+)\z/ do
+  "Hello, #{params['captures'].first}!"
+end
+Or with a block parameter:
 
-## JSON Front-matter
+get %r{/hello/([\w]+)} do |c|
+  # Matches "GET /meta/hello/world", "GET /hello/world/1234" etc.
+  "Hello, #{c}!"
+end
+Route patterns may have optional parameters:
 
-除了 YAML 外，你也可以使用 JSON 来编写 Front-matter，只要将 `---` 代换成 `;;;` 即可。
+get '/posts.?:format?' do
+  # matches "GET /posts" and any extension "GET /posts.json", "GET /posts.xml" etc.
+end
+Routes may also utilize query parameters:
 
-``` json
-"title": "Hello World",
-"date": "2013/7/13 20:46:25"
-;;;
-```
+get '/posts' do
+  # matches "GET /posts?title=foo&author=bar"
+  title = params['title']
+  author = params['author']
+  # uses title and author variables; query is optional to the /posts route
+end
+By the way, unless you disable the path traversal attack protection (see below), the request path might be modified before matching against your routes. -->

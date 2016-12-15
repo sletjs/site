@@ -1,128 +1,95 @@
 title: Router
 ---
 
-在Slet里，一个路由就一个带有path路径的Controller，而Controller里的无参数的HTTP method是具体的verb。
 
+## 第一种，暴露path和controller
+（controller内部不需要path）
+
+```js
+app.router('/', require('./ctrl') )  
 ```
+
+or
+
+```js
+app.router('/', './ctrl')  
+```
+
+已测
+
+## 第二种，将path写到controller里
+
+2.1 通过对象（可以实现，但不如通过路径方便）
+
+如果依赖已安装，即`app.defineController(require('slet-viewcontroller'))`，这样才加载的时候才不会报错。
+
+```js
+app.router(require('./pathctrl') )  
+```
+
+如果没有装依赖，那么需要在asyncRouter里注册这样的路由。asyncRouter会自动检测root下面的所有依赖，并提前注入。
+
+```js
+app.asyncRouter(function(){
+   app.router('/2', require('./viewctrl') )  
+}) 
+``` 
+
+or
+
+2.2 通过路径（推荐）
+
+```js
+app.router('./pathctrl')  
+```
+
+已测
+
+pathctrl代码
+
+```js
 'use strict';
 
-const ViewController = require('slet').ViewController
+const ApiController = require('..').Base
 
-module.exports = class MyBasicController extends ViewController {
-  constructor (app, ctx, next) {
-    super(app, ctx, next)
+class PathController extends ApiController {
+  constructor(ctx, next) {
+    super(ctx, next)
     
-    this.path = '/'
+    this.path = '/c'
   }
   
-  get () { 
-    .. show something ..
-  } 
-  
-  post () { 
-    .. create something ..
-  }
-  
-  put () { 
-    .. replace something ..
-  }
-  
-  patch () { 
-    .. modify something ..
-  }
-  
-  delete () { 
-    .. annihilate something ..
-  }
-  
-  options () { 
-    .. appease something ..
-  }
-  
-  link () { 
-    .. affiliate something ..
-  }
-  
-  unlink () { 
-    .. separate something ..
-  }
-}
-```
-
-路由是通过它们定义的顺序来匹配的。匹配的第一个路由会处理该请求。
-
-Route patterns may include named parameters, accessible via the params hash:
-
-```
-'use strict'
-
-const BasicController = require('../../../').BasicController
-
-module.exports = class MyParamsController extends BasicController {
-  constructor(app, ctx, next) {
-    super(app, ctx, next)
-    
-    this.path = '/hello/:name'
-  }
-  
-  alias () {
-    this.params = this.ctx.params
-  }
-  
-  get () { 
-    // matches "GET /hello/foo" and "GET /hello/bar"
-    // params['name'] is 'foo' or 'bar'
-    return `Hello ${this.params['name']}!`
+  get() {
+    var a = this.query.a
+    console.log(a)
+    return {
+      dddd:1,
+      b: a
+    }
   } 
 }
+
+PathController.path = '/b'
+
+module.exports = PathController
 ```
 
-You can also access named parameters via block parameters:
+优先级
 
-get '/hello/:name' do |n|
-  # matches "GET /hello/foo" and "GET /hello/bar"
-  # params['name'] is 'foo' or 'bar'
-  # n stores params['name']
-  "Hello #{n}!"
-end
-Route patterns may also include splat (or wildcard) parameters, accessible via the params['splat'] array:
+> app.router('/d', './controller/a')  >　this.path= '/ｃ' > Controller.path='/b'
 
-get '/say/*/to/*' do
-  # matches /say/hello/to/world
-  params['splat'] # => ["hello", "world"]
-end
+亦即
 
-get '/download/*.*' do
-  # matches /download/path/to/file.xml
-  params['splat'] # => ["path/to/file", "xml"]
-end
-Or with block parameters:
+> '/d' > '/c' > '/b
 
-get '/download/*.*' do |path, ext|
-  [path, ext] # => ["path/to/file", "xml"]
-end
-Route matching with Regular Expressions:
 
-get /\A\/hello\/([\w]+)\z/ do
-  "Hello, #{params['captures'].first}!"
-end
-Or with a block parameter:
+## 第三种，指定路径加载
 
-get %r{/hello/([\w]+)} do |c|
-  # Matches "GET /meta/hello/world", "GET /hello/world/1234" etc.
-  "Hello, #{c}!"
-end
-Route patterns may have optional parameters:
+```js
+app.routerDir('app/controller' )  
+```
 
-get '/posts.?:format?' do
-  # matches "GET /posts" and any extension "GET /posts.json", "GET /posts.xml" etc.
-end
-Routes may also utilize query parameters:
+此种情况会默认加载某个目录下的controller，请确保你的controller里有path，无论是属性，还是static属性方式都行。
 
-get '/posts' do
-  # matches "GET /posts?title=foo&author=bar"
-  title = params['title']
-  author = params['author']
-  # uses title and author variables; query is optional to the /posts route
-end
-By the way, unless you disable the path traversal attack protection (see below), the request path might be modified before matching against your routes.
+已测
+

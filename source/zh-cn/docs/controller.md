@@ -1,159 +1,142 @@
 title: 控制器
 ---
-## 处理请求参数的3种方法
 
-### QueryString
+## 基础用法
 
-当curl命令发起Post测试请求，带有name参数
+在Slet里，一个路由就一个带有path路径的Controller，而Controller里的无参数的HTTP method是具体的verb。
 
-```
-curl http://127.0.0.1:6001/posts?a=1&b=2
-```
-
-此时，你可以通过
-
-```
-get () {
-  let a = this.query.a
-  let b = this.query.b
-}
-
-post () {
-  let a = this.query.a
-  let b = this.query.b
-}
-```
-
-QueryString适用于任何情况，所以this.query常常和另外的this.params和this.body组合使用。
-
-### 路由参数
-
-``` js
-posts/:id => posts/89
-```
-
-此时，你可以通过
-
-```
-get () {
-  let id = this.params.id
-  // 此时id = 89
-}
-
-```
-
-这个只有在路由path里有占位（具名路由）才有用。
-
-### Body
-
-对于Post、Put、Patch、Delete、Link、Unlink等需要解析表单内容的verb，你需要是使用this.body
-
-当curl命令发起Post测试请求，带有name参数
-
-```
-curl -d "name='foo'" http://127.0.0.1:6001/c
-```
-
-处理如下
-
-```
-post () {
-  let _name = this.body.name
-  // 此时_name = 'foo'
-}
-
-```
-
-## Post
-
-首先，先了解一下关于http协议里定义的四种常见数据的post方法，分别是： 
-
-- application/www-form-ulrencoded 
-- multipart/form-data 
-- application/json 
-- text/xml
-
-
-## 上传
-
-- UploadController
-- UploadViewController
-
-### UploadController
-
-```
-$ npm i -S slet
-$ npm i -S slet-uploadcontroller
-```
-
-编写uploadctrl.js
-
-```
+```js
 'use strict';
 
-const UploadController = require('slet').UploadController
+const ViewController = require('slet').ViewController
 
-module.exports = class MyUploadController extends UploadController {
-  constructor(app, ctx, next) {
+module.exports = class MyBasicController extends ViewController {
+  constructor (app, ctx, next) {
     super(app, ctx, next)
-    
-    this.post_filter = [this.upload.single('avatar')]
+
+    this.path = '/'
   }
-  
-  post() { 
-    return {
-      msg: 'this is a upload'
-    }
-  } 
+
+  get () {
+    .. show something ..
+  }
+
+  post () {
+    .. create something ..
+  }
+
+  put () {
+    .. replace something ..
+  }
+
+  patch () {
+    .. modify something ..
+  }
+
+  delete () {
+    .. annihilate something ..
+  }
+
+  options () {
+    .. appease something ..
+  }
+
+  link () {
+    .. affiliate something ..
+  }
+
+  unlink () {
+    .. separate something ..
+  }
 }
 ```
 
-这里使用了post_filter拦截器，具体参加文档。
+路由是通过它们定义的顺序来匹配的。匹配的第一个路由会处理该请求。
 
-这里使用的单一文件，更多方法参见
+## Controller
 
-- https://github.com/expressjs/multer
-- https://github.com/koa-modules/multer
+- 分类
+    - base: 所有controller的基类
+      - [BaseController](https://github.com/sletjs/BaseController)
+    - basic：直接返回json或其他内容
+      - [BasicController](https://github.com/sletjs/BasicController)
+    - view：返回tpl和data，如果无，从this变量上获取
+      - [ViewController](https://github.com/sletjs/ViewController)
+    - upload：上传文件
+      - [UploadController](https://github.com/sletjs/UploadController)
+      - [UploadViewController](https://github.com/sletjs/UploadViewController)
+    - session：会话
 
-### UploadViewController
+### 生命周期
 
+在src/Slet.js中，调用如下
+
+```js
+// before
+ctrl.before()
+
+// only {verb} filter
+ctrl.{verb}_filter = []
+
+// execute {verb}()，比如get(){}、post(){}
+ctrl.{verb}()
+
+// after
+ctrl.after()
 ```
-$ npm i -S slet
-$ npm i -S slet-viewcontroller
-$ npm i -S nunjucks
-$ npm i -S slet-uploadviewcontroller
+
+- before 是{verb}()之前调用的
+- after 是{verb}()之后调用的
+- ctrl.{verb}_filter = [] 利用koa 2.x中间件原理，拦截{verb}()请求前和请求后
+
+另外还提供了一个辅助定义别名的 alias 方法
+
+alias 别名定义：如果支持bodyparser，那么把this.ctx.request.body简化为this.pp，避免特别长的方法调用。
+
+```js
+alias() {
+  if (this.ctx.request.body) {
+      this.pp = this.ctx.request.body
+  }
+}
 ```
 
-编写uploadctrl.js
+all方法适用于处理所有verb的请求
 
-```
-'use strict';
+如果有all方法，也有对应的verb请求，此种情况下，只会执行all()
 
-const UploadViewController = require('slet').UploadViewController
+### BaseController
 
-module.exports = class MyUploadController extends UploadViewController {
+```js
+module.exports = class BaseController {
   constructor(app, ctx, next) {
-    super(app, ctx, next)
+    this.app = app
+    this.ctx = ctx
+    this.next = next
+    this.renderType = 'default'
+    this.data = {}
+    this.tpl = 'index'
     
-    this.post_filter = [this.upload.single('avatar')]
+    this.result = '{verb}() call result'
+  }
+
+  // lifecycle
+  before() {
+    
   }
   
-  post() { 
-    return {
-      tpl: 'index',
-      data: {
-        title: 'this a upload view'
-      }
+  alias() {
+    if (this.ctx.request.body) {
+        this.pp = this.ctx.request.body
     }
-  } 
+  }
+  
+  after() {
+    
+  }
 }
-
 ```
 
-如果通过`this.renderType = 'default'`也可以实现UploadController的效果
+说明
 
-### 示例
-
-- [example-upload](https://github.com/sletjs/example-upload)
-- [example-upload-view](https://github.com/sletjs/example-upload-view)
-
+- renderType：default | view
