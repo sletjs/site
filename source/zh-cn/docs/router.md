@@ -2,7 +2,8 @@ title: Router
 ---
 
 
-## 第一种，暴露path和controller
+## 手动知道path和controller
+
 （controller内部不需要path）
 
 ```js
@@ -17,7 +18,7 @@ app.router('/', './ctrl')
 
 已测
 
-## 第二种，将path写到controller里
+## 将path写到controller里
 
 2.1 通过对象（可以实现，但不如通过路径方便）
 
@@ -83,7 +84,7 @@ module.exports = PathController
 > '/d' > '/c' > '/b
 
 
-## 第三种，指定路径加载
+## 指定路径，自动挂载
 
 ```js
 app.routerDir('app/controller' )  
