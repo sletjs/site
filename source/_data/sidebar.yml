@@ -11,6 +11,7 @@ docs:
     http: http.html
     render: render.html
     filter: filter.html
+    test: test.html
   customization:
     extend: extend.html
     controller-ext: controller-ext.html

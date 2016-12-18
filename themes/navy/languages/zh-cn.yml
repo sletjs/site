@@ -53,6 +53,7 @@ sidebar:
     render: 渲染
     extend: 扩展
     controller-ext: 控制器扩展
+    test: 测试
   api:
     core: 核心
     overview: 概述
