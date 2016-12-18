@@ -8,8 +8,8 @@ docs:
   basic_usage:
     router: router.html
     controller: controller.html
-    http: http.html
     render: render.html
+    http: http.html
     filter: filter.html
     test: test.html
   customization:

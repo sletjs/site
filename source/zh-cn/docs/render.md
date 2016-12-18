@@ -1,4 +1,4 @@
-title: 渲染
+title: View
 ---
 
 目前支持2种
