@@ -19,16 +19,15 @@ Sletjs 是一个快速、简洁且高效的Web框架。Sletjs 使用 [Koa 2.x](h
 ## 示例
 
 ```
-'use strict';
+'use strict'
 
-const Slet = require('slet');
+const Slet = require('slet')
+
 const app = new Slet({
-    root: __dirname,
-});
+    root: __dirname
+})
 
-const BaseViewController = require('slet-basecontroller')
-
-class MyController extends BaseViewController {
+class MyController extends Slet.BaseController {
   get() { 
     var a = this.query.a
 
@@ -37,7 +36,6 @@ class MyController extends BaseViewController {
 }
 
 app.router('/', MyController)
-
 
 app.start(3000) 
 
