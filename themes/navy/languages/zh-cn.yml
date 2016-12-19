@@ -50,7 +50,7 @@ sidebar:
     controller: 控制器
     http: Http基础
     filter: 过滤器
-    render: 渲染
+    view: 视图
     extend: 扩展
     controller-ext: 控制器扩展
     test: 测试

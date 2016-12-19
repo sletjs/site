@@ -8,7 +8,7 @@ docs:
   basic_usage:
     router: router.html
     controller: controller.html
-    render: render.html
+    view: view.html
     http: http.html
     filter: filter.html
     test: test.html
