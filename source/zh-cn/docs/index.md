@@ -13,7 +13,35 @@ Sletjs 是一个快速、简洁且高效的Web框架。Sletjs 使用 [Koa 2.x](h
 - Pluggable Controller
 - Build-in Router && Auto-mount Router
 - Auto-inject Controller Dependency
+- Custom View Render
 - Convention over Configuration
+
+## 示例
+
+```
+'use strict';
+
+const Slet = require('slet');
+const app = new Slet({
+    root: __dirname,
+});
+
+const BaseViewController = require('slet-basecontroller')
+
+class MyController extends BaseViewController {
+  get() { 
+    var a = this.query.a
+
+    return `hello world ${a}`
+  } 
+}
+
+app.router('/', MyController)
+
+
+app.start(3000) 
+
+```
 
 ## 安装
 
