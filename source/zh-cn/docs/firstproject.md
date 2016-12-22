@@ -13,10 +13,7 @@ $ npm i -S slet
 'use strict';
 
 const Slet = require('slet');
-const app = new Slet({
-    root: __dirname,
-    debug: true
-});
+const app = new Slet();
 
 app.router('/', './basicctrl')  
 
@@ -28,14 +25,10 @@ app.start(3000)
 ```js
 'use strict';
 
-const BasicController = require('slet').BasicController
+const BasicController = require('slet').BaseController
 
-module.exports = class MyBasicController extends BasicController {
-  constructor(app, ctx, next) {
-    super(app, ctx, next)
-  }
-  
-  get() { 
+module.exports = class MyBasicController extends BaseController {
+  get(req, res) { 
     let a = this.query.a
     // this.renderType='view'
     return {

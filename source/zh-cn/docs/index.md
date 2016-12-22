@@ -27,9 +27,21 @@ const app = new Slet()
 
 class MyController extends Slet.BaseController {
   get (req, res) { 
+    let id = req.params.id
     var a = req.query.a
 
-    return res.body = `hello world ${a}`
+    // return res.body = `hello world ${a}`
+    return `hello world id=${id} && query=${a}`
+  }
+  
+  post(req, res) {
+    let id = req.params.id
+    var a = req.body.a
+    
+    return res.body = {
+      id: id,
+      query: a
+    }
   } 
 }
 
