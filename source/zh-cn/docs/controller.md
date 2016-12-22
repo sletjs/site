@@ -171,101 +171,7 @@ PathController.path = '/b'
 module.exports = PathController
 ```
 
-
-## Named Parameters
-
-Route patterns may include named parameters, accessible via the params hash:
-
-```js
-'use strict';
-
-const ViewController = require('slet').ViewController
-
-module.exports = class MyBasicController extends ViewController {
-  constructor (app, ctx, next) {
-    super(app, ctx, next)
-
-    this.path = '/hello/:name'
-  }
-
-  get () {
-    // matches "GET /hello/foo" and "GET /hello/bar"
-    // params['name'] is 'foo' or 'bar'
-    return `Hello ${this.params['name']}!`
-  }
-}
-```
-
-## Modified Parameters
-
-### Optional
-
-Parameters can be suffixed with a question mark (?) to make the parameter optional. This will also make the prefix optional.
-
-```js
-var re = pathToRegexp('/:foo/:bar?', keys)
-// keys = [{ name: 'foo', ... }, { name: 'bar', delimiter: '/', optional: true, repeat: false }]
-
-re.exec('/test')
-//=> ['/test', 'test', undefined]
-
-re.exec('/test/route')
-//=> ['/test', 'test', 'route']
-```
-
-### Zero or more
-
-Parameters can be suffixed with an asterisk (*) to denote a zero or more parameter matches. The prefix is taken into account for each match.
-
-```js
-var re = pathToRegexp('/:foo*', keys)
-// keys = [{ name: 'foo', delimiter: '/', optional: true, repeat: true }]
-
-re.exec('/')
-//=> ['/', undefined]
-
-re.exec('/bar/baz')
-//=> ['/bar/baz', 'bar/baz']
-```
-
-### One or more
-
-Parameters can be suffixed with a plus sign (+) to denote a one or more parameter matches. The prefix is taken into account for each match.
-
-```js
-var re = pathToRegexp('/:foo+', keys)
-// keys = [{ name: 'foo', delimiter: '/', optional: false, repeat: true }]
-
-re.exec('/')
-//=> null
-
-re.exec('/bar/baz')
-//=> ['/bar/baz', 'bar/baz']
-```
-
-### Custom Match Parameters
-
-All parameters can be provided a custom regexp, which overrides the default ([^\/]+).
-
-```js
-var re = pathToRegexp('/:foo(\\d+)', keys)
-// keys = [{ name: 'foo', ... }]
-
-re.exec('/123')
-//=> ['/123', '123']
-
-re.exec('/abc')
-//=> null
-```
-
-Please note: Backslashes need to be escaped with another backslash in strings.
-
-### 参考资料
-
-只要https://github.com/pillarjs/path-to-regexp支持的路由都可以的。
-
-
-## Controller
+## 分类
 
 - 分类
     - base: 所有controller的基类
@@ -277,7 +183,7 @@ Please note: Backslashes need to be escaped with another backslash in strings.
       - [UploadViewController](https://github.com/sletjs/UploadViewController)
     - session：会话
 
-### 生命周期
+## 生命周期
 
 在src/Slet.js中，调用如下
 
