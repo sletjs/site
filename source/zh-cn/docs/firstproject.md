@@ -28,9 +28,9 @@ app.start(3000)
 const BasicController = require('slet').BaseController
 
 module.exports = class MyBasicController extends BaseController {
-  get(req, res) { 
-    let a = this.query.a
-    // this.renderType='view'
+  get (req, res) { 
+    let a = req.query.a
+    
     return {
       a: 'this is a',
       b: {
