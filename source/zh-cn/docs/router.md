@@ -32,13 +32,11 @@ app.router(require('./pathctrl') )
 
 
 ```js
-app.asyncRouter(function(){
+app.asyncRouter(function () {
    app.router('/2', require('./viewctrl') )  
-}) 
-``` 
+})
+```
 
-
-or
 
 ### 2.2 通过路径（推荐）
 
@@ -185,6 +183,212 @@ re.exec('/abc')
 ```
 
 Please note: Backslashes need to be escaped with another backslash in strings.
+
+## Route paths
+
+Here are some examples of route paths based on strings.
+
+This route path will match requests to the root route, /.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = '/'
+  }
+  
+  get () {
+    return 'root'
+  } 
+}
+
+// express
+app.get('/', function (req, res) {
+  res.send('root')
+})
+```
+
+This route path will match requests to /about.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = '/about'
+  }
+  
+  get () {
+    return 'about'
+  } 
+}
+
+// express
+app.get('/about', function (req, res) {
+  res.send('about')
+})
+```
+
+This route path will match requests to /random.text.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = '/random.text'
+  }
+  
+  get () {
+    return 'random.text'
+  } 
+}
+
+// express
+app.get('/random.text', function (req, res) {
+  res.send('random.text')
+})
+```
+
+Here are some examples of route paths based on string patterns.
+
+This route path will match acd and abcd.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = '/ab?cd'
+  }
+  
+  get () {
+    return 'ab?cd'
+  } 
+}
+
+// express
+app.get('/ab?cd', function (req, res) {
+  res.send('ab?cd')
+})
+```
+
+This route path will match abcd, abbcd, abbbcd, and so on.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = '/ab+cd'
+  }
+  
+  get () {
+    return 'ab+cd'
+  } 
+}
+
+// express
+app.get('/ab+cd', function (req, res) {
+  res.send('ab+cd')
+})
+```
+
+This route path will match abcd, abxcd, abRANDOMcd, ab123cd, and so on.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = '/ab*cd'
+  }
+  
+  get () {
+    return 'ab*cd'
+  } 
+}
+
+// express
+app.get('/ab*cd', function (req, res) {
+  res.send('ab*cd')
+})
+```
+
+This route path will match /abe and /abcde.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = '/ab(cd)?e'
+  }
+  
+  get () {
+    return 'ab(cd)?e'
+  } 
+}
+
+// express
+app.get('/ab(cd)?e', function (req, res) {
+  res.send('ab(cd)?e')
+})
+```
+
+Examples of route paths based on regular expressions:
+
+This route path will match anything with an “a” in the route name.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = /a/
+  }
+  
+  get () {
+    return '/a/'
+  } 
+}
+
+// express
+app.get(/a/, function (req, res) {
+  res.send('/a/')
+})
+```
+
+This route path will match butterfly and dragonfly, but not butterflyman, dragonflyman, and so on.
+
+```js
+// slet
+class MyController extends BaseController {
+  constructor (ctx, next) {
+    super(ctx, next)
+    
+    this.path = /.*fly$/
+  }
+  
+  get () {
+    return '/.*fly$/'
+  } 
+}
+
+// express
+app.get(/.*fly$/, function (req, res) {
+  res.send('/.*fly$/')
+})
+```
 
 ### 参考资料
 
