@@ -23,6 +23,8 @@ docs:
 api:
   core:
     overview: index.html
+    request: request.html
+    response: response.html
     events: events.html
     locals: locals.html
     router: router.html

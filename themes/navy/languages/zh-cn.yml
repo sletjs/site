@@ -56,6 +56,8 @@ sidebar:
     test: 测试
   api:
     core: 核心
+    request: 请求
+    response: 响应
     overview: 概述
     events: 事件
     locals: 本地变量

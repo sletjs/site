@@ -199,7 +199,7 @@ class MyController extends BaseController {
     this.path = '/'
   }
   
-  get () {
+  get (req, res) {
     return 'root'
   } 
 }
@@ -221,7 +221,7 @@ class MyController extends BaseController {
     this.path = '/about'
   }
   
-  get () {
+  get (req, res) {
     return 'about'
   } 
 }
@@ -243,7 +243,7 @@ class MyController extends BaseController {
     this.path = '/random.text'
   }
   
-  get () {
+  get (req, res) {
     return 'random.text'
   } 
 }
@@ -267,7 +267,7 @@ class MyController extends BaseController {
     this.path = '/ab?cd'
   }
   
-  get () {
+  get (req, res) {
     return 'ab?cd'
   } 
 }
@@ -289,7 +289,7 @@ class MyController extends BaseController {
     this.path = '/ab+cd'
   }
   
-  get () {
+  get (req, res) {
     return 'ab+cd'
   } 
 }
@@ -311,7 +311,7 @@ class MyController extends BaseController {
     this.path = '/ab*cd'
   }
   
-  get () {
+  get (req, res) {
     return 'ab*cd'
   } 
 }
@@ -333,7 +333,7 @@ class MyController extends BaseController {
     this.path = '/ab(cd)?e'
   }
   
-  get () {
+  get (req, res) {
     return 'ab(cd)?e'
   } 
 }
@@ -357,7 +357,7 @@ class MyController extends BaseController {
     this.path = /a/
   }
   
-  get () {
+  get (req, res) {
     return '/a/'
   } 
 }
@@ -379,7 +379,7 @@ class MyController extends BaseController {
     this.path = /.*fly$/
   }
   
-  get () {
+  get (req, res) {
     return '/.*fly$/'
   } 
 }
