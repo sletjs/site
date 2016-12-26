@@ -5,7 +5,7 @@ The req object represents the HTTP request and has properties for the request qu
 
 For example:
 
-```
+```js
 // slet
 class MyController extends BaseController {
   constructor (ctx, next) {
@@ -15,7 +15,7 @@ class MyController extends BaseController {
   }
   
   get (req, res) {
-    return 'user ' + req.params.id
+    res.send('user ' + req.params.id)
   } 
 }
 
@@ -37,7 +37,7 @@ class MyController extends BaseController {
   }
   
   get (request, response) {
-    return 'user ' + request.params.id
+    response.send('user ' + request.params.id)
   } 
 }
 
