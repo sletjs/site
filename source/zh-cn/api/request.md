@@ -404,6 +404,10 @@ req.acceptsEncodings();
 
 Note that the identity encoding (which means no encoding) could be unacceptable if the client explicitly sends identity;q=0. Although this is an edge case, you should still handle the case where this method returns false.
 
+## request.acceptsCharset(charsets)
+
+新增，兼容expressapi,用法同acceptsCharsets
+
 ## request.acceptsCharsets(charsets)
 
 Check if charsets are acceptable, returning the best match when true, otherwise false.
