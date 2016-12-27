@@ -582,6 +582,12 @@ koa uses [http-errors](https://github.com/jshttp/http-errors) to create errors.
 
 koa中
 
+## request.qs
+
+> qs = A querystring parser with nesting support
+
+自己扩展的，如果是嵌入复杂的querystring，可以采用qs来实现
+
 ## request.length
 
 Return request Content-Length as a number when present, or undefined.
