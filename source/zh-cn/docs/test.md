@@ -5,13 +5,13 @@ supertest是express和koa里常用的api测试工具，非常简单，方便，�
 
 ## sletTest
 
-```
+```js
 $ npm i -D slettest
 ```
 
 ## app.js
 
-```
+```js
 'use strict';
 
 const Slet = require('slet');
@@ -30,7 +30,7 @@ module.exports = app
 
 ## 测试代码
 
-```
+```js
 import test from 'ava'
 
 var app = require('./app')
