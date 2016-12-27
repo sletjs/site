@@ -234,23 +234,19 @@ req.protocol
 
 ## req.query
 
-This property is an object containing a property for each query string parameter in the route. If there is no query string, it is the empty object, {}.
+Get parsed query-string, returning an empty object when no query-string is present. Note that this getter does not support nested parsing.
+
+For example "color=blue&size=small":
 
 ```js
-// GET /search?q=tobi+ferret
-req.query.q
-// => "tobi ferret"
 
-// GET /shoes?order=desc&shoe[color]=blue&shoe[type]=converse
-req.query.order
-// => "desc"
-
-req.query.shoe.color
-// => "blue"
-
-req.query.shoe.type
-// => "converse"
+{
+  color: 'blue',
+  size: 'small'
+}
 ```
+
+不支持嵌套，原因是采用的node.js自带的querystring，而非qs，如果想玩更复杂的，请使用req.qs来处理
 
 ## req.route
 
