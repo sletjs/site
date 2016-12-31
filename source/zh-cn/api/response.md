@@ -304,6 +304,7 @@ res.status(500).json({ error: 'message' });
 
 Sends a JSON response with JSONP support. This method is identical to res.json(), except that it opts-in to JSONP callback support.
 
+```js
 res.jsonp(null);
 // => null
 
@@ -312,7 +313,7 @@ res.jsonp({ user: 'tobi' });
 
 res.status(500).jsonp({ error: 'message' });
 // => { "error": "message" }
-
+```
 
 另外有3个配置项
 
@@ -324,7 +325,7 @@ res.status(500).jsonp({ error: 'message' });
 
 这里为了精简，使用class上下文的jsonp_callback_name
 
-```
+```js
 class MyController extends BaseController {
   constructor (ctx, next) {
     super(ctx, next)
