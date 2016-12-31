@@ -299,6 +299,9 @@ res.status(500).json({ error: 'message' });
 
 
 ## res.jsonp([body])
+
+所有的express测试都已经重写了，完全兼容
+
 Sends a JSON response with JSONP support. This method is identical to res.json(), except that it opts-in to JSONP callback support.
 
 res.jsonp(null);
@@ -311,11 +314,13 @@ res.status(500).jsonp({ error: 'message' });
 // => { "error": "message" }
 
 
-说明，express支持
+另外有3个配置项
 
-```
-app.set('jsonp callback name', 'cb');
-```
+- jsonp_callback_name
+- json_spaces
+- json_replacer
+
+### jsonp_callback_name
 
 这里为了精简，使用class上下文的jsonp_callback_name
 
@@ -336,6 +341,48 @@ class MyController extends BaseController {
 ```
 
 当然也可以通过callback作为querystring来设置。
+
+### json_spaces
+
+使用class上下文的json_spaces，空格数量
+
+```js
+module.exports = class MyController extends BaseController {
+  constructor (app, ctx, next) {
+    super(app, ctx, next)
+
+    this.path = '/14'
+    this.json_spaces = 2
+  }
+  
+  get (req, res) {
+    res.jsonp({ name: 'tobi', age: 2 });
+  }
+}
+```
+
+### json_replacer
+
+使用class上下文的json_replacer：对json进行过滤替换
+
+```js
+module.exports = class MyController extends BaseController {
+  constructor (app, ctx, next) {
+    super(app, ctx, next)
+
+    this.path = '/13'
+    this.json_replacer = function(key, val){
+      return '_' == key[0]
+        ? undefined
+        : val;
+    }
+  }
+  
+  get (req, res) {
+    res.jsonp({ name: 'tobi', _id: 12345 });
+  }
+}
+```
 
 ## res.get(field)
 
