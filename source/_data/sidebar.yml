@@ -17,6 +17,7 @@ docs:
     controller-ext: controller-ext.html
     plugins: plugins.html
   miscellaneous:
+    dept: dept.html
     troubleshooting: troubleshooting.html
     contributing: contributing.html
 

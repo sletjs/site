@@ -54,6 +54,7 @@ sidebar:
     extend: 扩展
     controller-ext: 控制器扩展
     test: 测试
+    dept: 依赖
   api:
     core: 核心
     request: 请求
